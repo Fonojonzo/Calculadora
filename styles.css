@@ -1,0 +1,62 @@
+#App{
+    border-radius: 3%;
+    border-style:inset;
+    border-color: black;
+    border-width: 4px;
+    margin: 0 auto;
+    height: 55vh;
+    width: 40vh;
+    background-color: rgb(30, 30, 34);
+}
+
+.display{
+    background-color: rgb(98, 189, 98);
+    text-align: center;
+    font-size: 4vh;
+    border-style: inset;
+    color: black;
+    border-color: black;
+    border-width: 4px;
+    border-radius: 5%;
+    margin: 0 auto;
+    height: 5vh;
+    width: 90%;
+    margin-top: 5%;
+}
+
+.Container{
+    margin: 0 auto;
+    margin-top: 5%;/*Estrutura da base*/
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    height: 40vh;
+    width: 35vh;
+    justify-content: center;
+    grid-template-rows: 10vh;
+
+}
+
+
+.botao{
+    background-color:rgb(110, 122, 133);
+    margin: auto;
+    font-size: 5vh;
+    text-align: center;
+    width: 6vh;
+    height: 6vh;
+    border-radius: 15%;
+    transition: 0.2s;
+    user-select:none;
+}
+
+.botoes operadores{
+    background-color:rgb(31, 101, 170);
+    color: black;
+}
+
+.botao:hover {
+    cursor: pointer;
+    background-color: rgb(29, 29, 26);
+    transition: 0.2s;
+}
+

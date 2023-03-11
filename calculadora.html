@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+    <div id ="App">
+        <div class = "display">{{ Valor }}</div><!--{{valorCorrente || '0'}}-->
+
+        <div class = "Container">
+
+            <div v-on:click="limpar" class="botao">C</div>
+            <div v-on:click="sinal" class="botao">+/-</div>
+            <div v-on:click="porcentagem" class="botao">%</div>
+            <div v-on:click="dividir" class="botao operadores">÷</div>
+            <div v-on:click="juntarNumeros('7')" class="botao">7</div>
+            <div v-on:click="juntarNumeros('8')" class="botao">8</div>
+            <div v-on:click="juntarNumeros('9')" class="botao">9</div>
+            <div v-on:click="multiplicar" class="botao operadores">x</div>
+            <div v-on:click="juntarNumeros('4')" class="botao">4</div>
+            <div v-on:click="juntarNumeros('5')" class="botao">5</div>
+            <div v-on:click="juntarNumeros('6')" class="botao">6</div>
+            <div v-on:click="subtrair" class="botao operadores">-</div>
+            <div v-on:click="juntarNumeros('1')" class="botao">1</div>
+            <div v-on:click="juntarNumeros('2')" class="botao">2</div>
+            <div v-on:click="juntarNumeros('3')" class="botao">3</div>
+            <div v-on:click="somar" class="botao operadores">+</div>
+            <div v-on:click="juntarNumeros('0')" class="botao">0</div>
+            <div v-on:click="ponto" class="botao">.</div>
+            <div v-on:click="resultado" class="botao operadores"> = </div>
+        </div>
+    </div><!--Fim da calculadora-->
+
+  
+<script>
+ 
+ const { createApp } = Vue;
+
+createApp({
+    data() {
+        return{
+            Valor: "",
+            operador: null ,
+            numeroAnterior: null,
+            operadorClicado: false,
+        }
+    },
+    methods: {
+    limpar() {
+        this.operador = null;
+        this.Valor = '';
+        this.numeroAnterior = null;
+        this.operadorClicado = false;
+        this.SegundoNumero = false;
+        },
+    setarValor() {
+        this.Valor = this.Valor+this.operador;
+        this.operadorClicado = true;
+        this.SegundoNumero = true;
+    },
+    juntarNumeros(numero) {
+            if (this.operadorClicado) {
+                if (this.SegundoNumero == false){
+                    this.Valor = '';
+                } 
+        }
+        this.Valor = `${this.Valor}${numero}`;
+    },
+    porcentagem() {
+        this.Valor = `${parseFloat(this.Valor) / 100}`;
+    },
+    multiplicar() {
+        this.operador = "*"
+        this.setarValor();
+    },
+    diminuir() {
+        this.operador = (num1, num2) => num1 - num2;
+        this.setarValor();
+    },
+    resultado() {
+       if (this.operadorClicado){
+            this.Valor = eval(this.Valor);
+            this.Valor = Math.round(this.Valor * 100) / 100;
+            this.Valor = parseFloat(this.Valor)/1
+       };
+      this.operadorClicado = false;
+      this.numeroAnterior = null;
+    },
+    dividir() {
+      this.operador = "/"
+      this.setarValor();
+    },
+    somar() {
+      this.operador = "+"
+      this.setarValor();
+    },
+    subtrair() {
+      this.operador = "-"
+      this.setarValor();
+    },
+    sinal() {
+      this.Valor = this.Valor.charAt(0) === '-'
+        ? this.Valor.slice(1)
+        : `-${this.Valor}`;
+    },
+    ponto() {
+        if (this.Valor.indexOf('.') === -1) {
+          this.juntarNumeros('.');
+       }
+    }
+
+    },//Fim dos métodos.
+        
+}).mount("#App");
+
+
+</script>
+  
+</body>
+</html>
+
+
+<!--
+
+   const { createApp } = Vue;
+        var example1 = new Vue({
+            el: '#display',
+            data: {
+            counter: 0
+            },
+        methods: {
+            limpar: function () {
+                this.Valor = 3
+            }
+
+        }
+    });
+
+
+-->
